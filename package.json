@@ -2,9 +2,9 @@
   "name": "earthquakes",
   "version": "1.0.1",
   "engines": {
-    "node": "6.10.2"
+    "node": "7.10.0"
   },
-  "description": "",
+  "description": "An app to see earthquakes in turkey",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
