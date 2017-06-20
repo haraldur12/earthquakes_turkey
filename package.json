@@ -1,0 +1,23 @@
+{
+  "name": "earthquakes",
+  "version": "1.0.0",
+  "engines": {
+    "node": "6.10.2"
+  },
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.1",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.7",
+    "request": "^2.81.0"
+  }
+}
