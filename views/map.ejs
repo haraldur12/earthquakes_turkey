@@ -1,0 +1,59 @@
+<% include header %>
+
+    <% var locs = [] %>
+    <% var infos = [] %>
+
+      <div class="container">
+        <div id="map"></div>
+      </div>
+
+    <% eq.forEach(item => locs.push(JSON.stringify({"lat":item.loc[1], "lng":item.loc[0], "date" : item.date , "time" : item.time, "magnitude" : item.magnitude,"location" : item.location})))%>
+    <script type="text/javascript">
+      var locations = [<%-locs%>]
+      function initMap() {
+           var map = new google.maps.Map(document.getElementById('map'), {
+             zoom: 6,
+             center: {lat: 39.925533, lng: 32.866287}
+             });
+
+           var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+           var infoWin = new google.maps.InfoWindow();
+           var markers = locations.map(function(location, i) {
+           var marker = new google.maps.Marker({
+             position: location,
+             label : "H"
+           });
+     google.maps.event.addListener(marker, 'click', function(evt) {
+       $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip();
+       });
+       infoWin.setContent(`
+         <div class="infoView">
+         <div class='card'>
+     <div class='card-block'>
+       <h4 class='card-title'>${location.date.toLocaleString()}</h4>
+       <p class='card-text'>${location.time}</p>
+       <p class='card-text'>Siddet : ${location.magnitude}</p>
+       <p class='card-text'><i class="fa fa-location"></i> Mevki : ${location.location}</p>
+
+     </div>
+   </div>
+   </div>
+     `);
+       infoWin.open(map, marker);
+     })
+     return marker;
+   });
+           // Add a marker clusterer to manage the markers.
+           var markerCluster = new MarkerClusterer(map, markers,
+               {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+         }
+
+    </script>
+
+<%include footer %>
+<style>
+     #map {
+            height: 80%;
+          } 
+</style>
