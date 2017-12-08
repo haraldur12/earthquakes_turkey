@@ -15,7 +15,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 
-app.get('/', (req,res) => {
+app.get('/map', (req,res) => {
   Earthquakes.find({},(err,eq) => {
     if(err){
       console.log(err);
@@ -27,14 +27,14 @@ app.get('/', (req,res) => {
                     }
       earthquakes.push(object);
     });
-      res.render('index',{locations:earthquakes,
+      res.render('map',{locations:earthquakes,
                                       eq:eq});
     }
   });
 });
 
-app.get('/about',(req, res ) => {
-  res.render('about');
+app.get('/',(req, res ) => {
+  res.render('index');
 })
 
 app.listen(port);

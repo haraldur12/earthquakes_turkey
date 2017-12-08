@@ -1,6 +1,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const Earthquake = require('./models/earthquake');
+require('dotenv').config();
 
 mongoose.connect(process.env.DB_URL);
 
@@ -34,7 +35,7 @@ function func(data) {
   earthquake.latitude = newLine[2];
   earthquake.longitude = newLine[3];
   earthquake.magnitude = newLine[6];
-  let location = [newLine[3],newLine[2]];
+  let location = newLine[3] ? [newLine[3],newLine[2]] : [00000,00000];
   var newEarthQuake = new Earthquake({
   date:newLine[0],
   time: newLine[1],

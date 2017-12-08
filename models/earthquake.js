@@ -9,7 +9,7 @@ var earthquakeSchema = new mongoose.Schema({
           index: '2d'      // create the geospatial index
        },
     magnitude : String,
-    location : String
+    location : String 
 });
 
 

@@ -1,88 +1,15 @@
-<html>
-<head>
-  <title>Deprem Haritasi</title>
-  <link rel="stylesheet" href="https://bootswatch.com/lumen/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-  </script>
-  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-  <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX-YUSZCJWmMMar1czEVZ2aIG6r8vTh_w&callback=initMap">
-  </script>
-</head>
-<body>
+<% include header %>
 
-    <% var locs = [] %>
-    <% var infos = [] %>
-
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">Deprem Haritasi</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Harita</a></li>
-            <li><a href="/about">Hakkinda</a></li>
-          </ul>
-        </div>
-      </nav>
-      <div class="container">
-        <div id="map"></div>
-      </div>
-
-    <% eq.forEach(item => locs.push(JSON.stringify({"lat":item.loc[1], "lng":item.loc[0], "date" : item.date , "time" : item.time, "magnitude" : item.magnitude,"location" : item.location})))%>
-    <script type="text/javascript">
-      var locations = [<%-locs%>]
-      function initMap() {
-           var map = new google.maps.Map(document.getElementById('map'), {
-             zoom: 6,
-             center: {lat: 39.925533, lng: 32.866287}
-             });
-
-           var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-           var infoWin = new google.maps.InfoWindow();
-           var markers = locations.map(function(location, i) {
-           var marker = new google.maps.Marker({
-             position: location,
-             label : "H"
-           });
-     google.maps.event.addListener(marker, 'click', function(evt) {
-       $(document).ready(function(){
-         $('[data-toggle="tooltip"]').tooltip();
-       });
-       infoWin.setContent(`
-         <div class="infoView">
-         <div class='card'>
-     <div class='card-block'>
-       <h4 class='card-title'>${location.date.toLocaleString()}</h4>
-       <p class='card-text'>${location.time}</p>
-       <p class='card-text'>Siddet : ${location.magnitude}</p>
-       <p class='card-text'><i class="fa fa-location"></i> Mevki : ${location.location}</p>
-
-     </div>
-   </div>
-   </div>
-     `);
-       infoWin.open(map, marker);
-     })
-     return marker;
-   });
-           // Add a marker clusterer to manage the markers.
-           var markerCluster = new MarkerClusterer(map, markers,
-               {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-         }
-
-    </script>
-</body>
-<style>
-#map {
-        height: 80%;
-      }
-html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-</style>
-</html>
+  <div class='container'>
+    <div class="jumbotron">
+  <h1 class="display-3">Deprem Haritası</h1>
+  <p class="lead">Bu site içiresinde bulunan veriler Boğaziçi Üniversitesi Kandilli Rasathanesi ve Deprem Araştırma Enstitüsü Bölgesel Deprem-Tsunami İzleme Ve Değerlendirme Merkezi'den alınmıştır. </p>
+  <hr class="my-4">
+  <p>Henüz yeni veri toplanmaya başladığım için hali hazırda son zamanlarda olan 2000 depremin verisi bulunmaktadır. Veritabanı 15 günde bir güncellenecektir. </p>
+  <div class="btn btn-group">
+      <a class="btn btn-primary btn-lg" href="http://www.koeri.boun.edu.tr/scripts/lst9.asp" role="button">Kaynak</a>
+      <a class="btn btn-primary btn-lg info" href="/map" role="button">Harita</a>
+  </div>
+</div>
+  </div>
+<% include footer %>
