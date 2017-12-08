@@ -35,3 +35,5 @@ This humble webapp simply fetches the data from [koeri.boun.edu.tr](http://www.k
 # Production
 
 You can see the code running [@depremharitasi](https://depremharitasi.herokuapp.com/). That's all!
+
+![Deprem Haritasi Ekran Goruntusu](/screen_shot.png?raw=true "Earthquake Map of Turkey")
